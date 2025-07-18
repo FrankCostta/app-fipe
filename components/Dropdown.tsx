@@ -15,11 +15,10 @@ import SelectItem from "./SelectItem";
 type Props = {
 	options: any;
 	enabled: boolean;
-	onSelect: (code: string) => void;
 	label: string;
 }
 
-export default function Dropdown({ options, enabled, label, onSelect }: Props) {
+export default function Dropdown({ options, enabled, label }: Props) {
 	const [visible, setVisible] = useState(false);
 
 	if (!enabled) {
@@ -49,7 +48,6 @@ export default function Dropdown({ options, enabled, label, onSelect }: Props) {
 						<SelectItem
 							label={item.name} 
 							onSelect={() => {
-								onSelect(item.code);
 								setVisible(false);
 							}}
 						/>

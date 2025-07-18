@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
@@ -21,37 +17,33 @@ export default function Index() {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
   const [enableDropdownBrand, setEnableDropdownBrand] = useState(false);
   const [enableDropdownModel, setEnableDropdownModel] = useState(false);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [years, setYears] = useState([]);
+  let route = ""; 
 
 
   const onSelectedCategory = (id: string) => {
     if (selectedCategory !== id) {
       setSelectedCategory(id);
       loadBrands(id);
-      setEnableDropdownModel(false);
     }
   }
 
   async function loadBrands(category: string) {
-      const response = await api.get(`/${category}/brands`);
+      route = `/${category}/brands`;
+      const response = await api.get(route);
       setBrands(response.data);
       setEnableDropdownBrand(true);
   }
-  async function loadModels(category: string, brandId: string) {
-    const response = await api.get(`/${category}/brands/${brandId}/models`);
+  async function loadModels(brandId: string) {
+    route += `/${brandId}/models`;
+    const response = await api.get(route);
     setModels(response.data);
     setEnableDropdownModel(true);
-  }
-  async function loadYears(category: string, brandId: string, modelId: string) {
-    const response = await api.get(`/${category}/brands/${brandId}/models/${modelId}years/`);
-    setModels(response.data);
-    setEnableDropdownModel(true);
+    alert(route)
   }
 
   return (
@@ -59,9 +51,7 @@ export default function Index() {
 
       <Header /> {/* Logo fixada ao topo do app */}
 
-
       {/* Botões de categoria dos veículos */}
-
       <View style={styles.categoryBar}>
         {categories.map((category, index) => (
           <CategoryRadioButton 
@@ -80,28 +70,20 @@ export default function Index() {
           options={brands}
           enabled={enableDropdownBrand}
           label="Selecione uma marca"
-          onSelect={(brandId: string) => {
-            setSelectedBrand(brandId);
-            loadModels(selectedCategory, brandId);
-          }}
         />
 
         <Dropdown
           options={models}
           enabled={enableDropdownModel}
           label="Selecione um modelo"
-          onSelect={(modelId: string) => {
-            setSelectedYear(modelId);
-            loadYears(selectedCategory, modelId);
-          }}
         />
 
-        <Dropdown
+        {/* <Dropdown
           options={models}
           enabled={enableDropdownModel}
-          label="Selecione um modelo"
+          label="Selecione o ano do veículo"
           onSelect={() => null}
-        />
+        /> */}
 
       </View>
       

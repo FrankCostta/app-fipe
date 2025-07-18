@@ -15,11 +15,10 @@ import SelectBrand from "./SelectBrand";
 type Props = {
 	options: any;
 	enabled: boolean;
-	onSelect: (code: string) => void;
 	label: string;
 }
 
-export default function DropdownBrand({ options, enabled, label, onSelect }: Props) {
+export default function DropdownBrand({ options, enabled, label }: Props) {
 	const [visible, setVisible] = useState(false);
 
 	if (!enabled) {
@@ -32,7 +31,7 @@ export default function DropdownBrand({ options, enabled, label, onSelect }: Pro
 		<View>
 			<TouchableOpacity 
 				style={styles.container}
-				onPress={() => setVisible(true)}
+				onPress={() => {setVisible(true)}}
 			>
 				<Text style={styles.label}>{label}</Text>
 			</TouchableOpacity>
@@ -49,7 +48,6 @@ export default function DropdownBrand({ options, enabled, label, onSelect }: Pro
 						<SelectBrand 
 							label={item.name} 
 							onSelect={() => {
-								onSelect(item.code);
 								setVisible(false);
 							}}
 						/>
@@ -71,11 +69,6 @@ const styles = StyleSheet.create({
 		borderWidth: 5,
 		borderColor: "#0F092D",
 		borderRadius: 20,
-	},
-	img: {
-		width: 30,
-		height: 30,
-		marginRight: 10,
 	},
 	label: {
 		fontSize: 18,
