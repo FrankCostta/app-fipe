@@ -16,9 +16,10 @@ type Props = {
 	options: any;
 	enabled: boolean;
 	label: string;
+	onCodeSelect?: (code: string) => void;
 }
 
-export default function DropdownBrand({ options, enabled, label }: Props) {
+export default function DropdownBrand({ options, enabled, label, onCodeSelect }: Props) {
 	const [visible, setVisible] = useState(false);
 
 	if (!enabled) {
@@ -49,6 +50,7 @@ export default function DropdownBrand({ options, enabled, label }: Props) {
 							label={item.name} 
 							onSelect={() => {
 								setVisible(false);
+								onCodeSelect && onCodeSelect(item.code);
 							}}
 						/>
 					)}
@@ -61,8 +63,8 @@ export default function DropdownBrand({ options, enabled, label }: Props) {
 
 const styles = StyleSheet.create({
 	container: {
-		marginVertical: 14,
-		height: 80,
+		marginVertical: 10,
+		height: 70,
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
