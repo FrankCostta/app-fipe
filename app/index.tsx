@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import api from "@/services/api";
 
 import CategoryRadioButton from "@/components/CategoryRadioButton";
+import ContentBox from "@/components/ContentBox";
 import Dropdown from "@/components/Dropdown";
 import DropdownBrand from "@/components/DropdownBrand";
 import Header from "@/components/Header";
@@ -109,6 +110,8 @@ export default function Index() {
           label="Selecione o ano do veículo"
         />
       </View>
+
+      <ContentBox />
       
     </View>
   );
@@ -118,15 +121,15 @@ const styles = StyleSheet.create({
   categoryBar: {
     flexDirection: "row",
     justifyContent: "space-around",
+    backgroundColor: "#ffffff",
   },
   dropdownArea: {
-    height: 400,
-    padding: 20,
+    margin: 16,
   },
   separator: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#0f092d",
     textAlign: "center",
-    color: "rgb(15 9 45)",
   }
 });

@@ -1,12 +1,12 @@
-
-import { PropsWithChildren } from "react";
+import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type Props = PropsWithChildren<{
-	title: string,
-	isVisible: boolean,
-	onClose: () => void,
-}>
+type Props = {
+	title: string;
+	isVisible: boolean;
+	onClose: () => void;
+	children: React.ReactNode ;
+}
 
 export default function ModalDropdown({title, isVisible, onClose, children}: Props) {
 	return (

@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 import { useState } from "react";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ModalDropdown from "./ModalDropdown";
@@ -21,10 +13,11 @@ type Props = {
 
 export default function DropdownBrand({ options, enabled, label, onCodeSelect }: Props) {
 	const [visible, setVisible] = useState(false);
+	const [lb, setLb] = useState(label);
 
 	if (!enabled) {
 		return (
-			<View style={[styles.container, {borderColor: "#a1a9ad", backgroundColor: "#e0e7eb"}]}></View>
+			<View style={[styles.container, {backgroundColor: "#e0e7eb"}]}></View>
 		);
 	}
 
@@ -34,7 +27,7 @@ export default function DropdownBrand({ options, enabled, label, onCodeSelect }:
 				style={styles.container}
 				onPress={() => {setVisible(true)}}
 			>
-				<Text style={styles.label}>{label}</Text>
+				<Text style={styles.label}>{lb}</Text>
 			</TouchableOpacity>
 
 			<ModalDropdown
@@ -51,6 +44,7 @@ export default function DropdownBrand({ options, enabled, label, onCodeSelect }:
 							onSelect={() => {
 								setVisible(false);
 								onCodeSelect && onCodeSelect(item.code);
+								setLb(item.name);
 							}}
 						/>
 					)}
@@ -69,11 +63,12 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		borderWidth: 5,
-		borderColor: "#0F092D",
+		borderColor: "#a1a9ad",
 		borderRadius: 20,
 	},
 	label: {
 		fontSize: 18,
-		color: "#4d4848"
+		color: "#4d4848",
+		
 	},
 });
