@@ -1,19 +1,26 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> d175deb (.)
 import { useState } from "react";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ModalDropdown from "./ModalDropdown";
 import SelectBrand from "./SelectBrand";
 
 type Props = {
+	label: string;
 	options: any;
 	enabled: boolean;
-	label: string;
 	onCodeSelect?: (code: string) => void;
 }
 
-export default function DropdownBrand({ options, enabled, label, onCodeSelect }: Props) {
+export default function DropdownBrand({ label, options, enabled, onCodeSelect }: Props) {
 	const [visible, setVisible] = useState(false);
+<<<<<<< HEAD
 	const [lb, setLb] = useState(label);
+=======
+	const [lb, setLB] = useState(label);
+>>>>>>> d175deb (.)
 
 	if (!enabled) {
 		return (
@@ -44,7 +51,11 @@ export default function DropdownBrand({ options, enabled, label, onCodeSelect }:
 							onSelect={() => {
 								setVisible(false);
 								onCodeSelect && onCodeSelect(item.code);
+<<<<<<< HEAD
 								setLb(item.name);
+=======
+								setLB(item.name);
+>>>>>>> d175deb (.)
 							}}
 						/>
 					)}
