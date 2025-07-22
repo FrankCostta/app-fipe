@@ -74,6 +74,8 @@ export default function Index() {
     setEnableContentView(false);
   }
   
+  // Carrega os dados do ano do modelo especificado
+  // e habilita o ContentView
   async function loadInfo(yearId: string) {
     setSelectedYear(yearId);
     const response = await api.get(`/${selectedCategory}/brands/${selectedBrand}/models/${selectedModel}/years/${yearId}`);
@@ -82,11 +84,8 @@ export default function Index() {
     
   }
   
-  
-
   return (
     <View>
-
       <Header /> {/* Logo fixada ao topo do app */}
 
       {/* Botões de categoria dos veículos */}
