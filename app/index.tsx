@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import api from "@/services/api";
 
 import CategoryRadioButton from "@/components/CategoryRadioButton";
-import ContentBox from "@/components/ContentBox";
+import ContentView from "@/components/ContentView";
 import Dropdown from "@/components/Dropdown";
 import DropdownBrand from "@/components/DropdownBrand";
 import Header from "@/components/Header";
@@ -20,12 +20,15 @@ export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
   const [enableDropdownBrand, setEnableDropdownBrand] = useState(false);
   const [enableDropdownModel, setEnableDropdownModel] = useState(false);
   const [enableDropdownYear, setEnableDropdownYear] = useState(false);
+  const [enableContentView, setEnableContentView] = useState(false);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [years, setYears] = useState([]);
+  const [info, setInfo] = useState([]);
 
   // Seleciona uma categoria de veículo
   // habilitando o dropdown de marcas
@@ -42,11 +45,12 @@ export default function Index() {
   // Carrega as marcas de veículos de uma categoria selecionada
   // e habilita o dropdown de marcas
   async function loadBrands(category: string) {
-      const response = await api.get(`/${category}/brands`);
-      setBrands(response.data);
-      setEnableDropdownBrand(true);
+    const response = await api.get(`/${category}/brands`);
+    setBrands(response.data);
+    setEnableDropdownBrand(true);
     setEnableDropdownModel(false);
     setEnableDropdownYear(false);
+    setEnableContentView(false);
   }
 
   // Carrega os modelos de uma marca selecionada
@@ -57,6 +61,7 @@ export default function Index() {
     setModels(response.data);
     setEnableDropdownModel(true);
     setEnableDropdownYear(false);
+    setEnableContentView(false);
   }
 
   // Carrega os anos de um modelo selecionado
@@ -66,7 +71,18 @@ export default function Index() {
     const response = await api.get(`/${selectedCategory}/brands/${selectedBrand}/models/${modelId}/years`);
     setYears(response.data);
     setEnableDropdownYear(true);
-  } 
+    setEnableContentView(false);
+  }
+  
+  async function loadInfo(yearId: string) {
+    setSelectedYear(yearId);
+    const response = await api.get(`/${selectedCategory}/brands/${selectedBrand}/models/${selectedModel}/years/${yearId}`);
+    setInfo(response.data);
+    setEnableContentView(true);
+    
+  }
+  
+  
 
   return (
     <View>
@@ -87,7 +103,8 @@ export default function Index() {
       </View>
       
       <View style={styles.dropdownArea}>
-
+		
+		{/* Dropown de seleção da marca do veiculo */}
         <DropdownBrand
           options={brands}
           enabled={enableDropdownBrand}
@@ -96,22 +113,30 @@ export default function Index() {
         />
 
         <Text style={styles.separator}>|||</Text>
-
+		
+		{/* Dropdown de seleção do modelo do veiculo */}
         <Dropdown
           options={models}
           enabled={enableDropdownModel}
           label="Selecione um modelo"
           onCodeSelect={(code) => loadYears(code)}
         />
-
+		
+		{/* Dropdown de seleção do ano do veiculo */}
         <Dropdown
           options={years}
           enabled={enableDropdownYear}
           label="Selecione o ano do veículo"
+          onCodeSelect={(code) => loadInfo(code)}
         />
       </View>
-
-      <ContentBox />
+      
+      
+      {/* Area de informações do veiculo */}
+      <ContentView 
+      	enabled={enableContentView}
+	  	data={info} 
+	  />
       
     </View>
   );

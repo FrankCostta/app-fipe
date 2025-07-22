@@ -13,11 +13,6 @@ type Props = {
 
 export default function Dropdown({ options, enabled, label, onCodeSelect }: Props) {
 	const [visible, setVisible] = useState(false);
-<<<<<<< HEAD
-	const [lb, setLb] = useState(label);
-=======
-	const [lb, setLB] = useState(label);
->>>>>>> d175deb (.)
 
 	if (!enabled) {
 		return (
@@ -31,7 +26,7 @@ export default function Dropdown({ options, enabled, label, onCodeSelect }: Prop
 				style={styles.container}
 				onPress={() => setVisible(true)}
 			>
-				<Text style={styles.label}>{lb}</Text>
+				<Text style={styles.label}>{label}</Text>
 			</TouchableOpacity>
 
 			<ModalDropdown
@@ -48,11 +43,6 @@ export default function Dropdown({ options, enabled, label, onCodeSelect }: Prop
 							onSelect={() => {
 								setVisible(false);
 								onCodeSelect && onCodeSelect(item.code);
-<<<<<<< HEAD
-								setLb(item.name);
-=======
-								setLB(item.name);
->>>>>>> d175deb (.)
 							}}
 						/>
 					)}

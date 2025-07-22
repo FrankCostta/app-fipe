@@ -1,16 +1,27 @@
 
-
-
-
 import { StyleSheet, Text, View } from "react-native";
 import ActionButton from "./ActionButton";
 
-export default function ContentBox() {
+type Props = {
+	data: any;
+	enabled: boolean;
+}
+
+export default function ContentView({ data, enabled }: Props) {
+  
+  if (!enabled) {
+	return (
+	  <View style={styles.container}>
+		<View style={styles.disabled}></View>
+	  </View>
+	);
+  }
+  
   return (
 	<View style={styles.container}>
-
+		
 		<View style={styles.priceArea}>
-			<Text style={styles.price}>R$ 46.676,00</Text>
+			<Text style={styles.price}>{data.price}</Text>
 		</View>
 
 		<View style={styles.optionsBar}>
@@ -24,8 +35,14 @@ export default function ContentBox() {
 
 const styles = StyleSheet.create({
   container: {
-	height: 200,
-	marginHorizontal: 16,
+    height: 200,
+    marginHorizontal: 16,
+  },
+  disabled: {
+    height: "70%",
+	backgroundColor: "#e0e7eb",
+	marginVertical: 16,
+	borderRadius: 25,
   },
   priceArea: {
 	height: "70%",
