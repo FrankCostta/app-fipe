@@ -1,23 +1,21 @@
 
-
-
-
-
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import imageUri from "../services/image-uri";
+
 
 type Props = {
 	//icon: string;
 	label: string;
 	onSelect: () => void;
-
+	code: number;
 }
 
-export default function SelectBrand({label, onSelect}: Props) {
+export default function SelectBrand({label, code, onSelect}: Props) {
 	return (
 		<TouchableOpacity style={styles.container} onPress={onSelect}>
 			<Image
 				style={styles.icon}
-				source={require("@/assets/images/ui/question.png")}
+				source={imageUri[code] || require("@/assets/images/ui/question.png")}
 			/>
 			<Text style={styles.label}>{label}</Text>
 		</TouchableOpacity>
@@ -35,13 +33,12 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	icon: {
-		width: 40,
-		height: 40,
+		width: 50,
+		height: 50,
 		marginHorizontal: 20
 	},
 	label: {
 		fontSize: 20,
-		fontWeight: 400,
-		color: "#6b6262"
+		color: "#6d6969"
 	}
 });

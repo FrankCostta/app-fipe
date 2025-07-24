@@ -20,7 +20,6 @@ export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
   const [enableDropdownBrand, setEnableDropdownBrand] = useState(false);
   const [enableDropdownModel, setEnableDropdownModel] = useState(false);
   const [enableDropdownYear, setEnableDropdownYear] = useState(false);
@@ -77,7 +76,6 @@ export default function Index() {
   // Carrega os dados do ano do modelo especificado
   // e habilita o ContentView
   async function loadInfo(yearId: string) {
-    setSelectedYear(yearId);
     const response = await api.get(`/${selectedCategory}/brands/${selectedBrand}/models/${selectedModel}/years/${yearId}`);
     setInfo(response.data);
     setEnableContentView(true);
@@ -85,7 +83,7 @@ export default function Index() {
   }
   
   return (
-    <View>
+    <View style={{ backgroundColor: "#ffffff",}}>
       <Header /> {/* Logo fixada ao topo do app */}
 
       {/* Botões de categoria dos veículos */}
@@ -145,7 +143,6 @@ const styles = StyleSheet.create({
   categoryBar: {
     flexDirection: "row",
     justifyContent: "space-around",
-    backgroundColor: "#ffffff",
   },
   dropdownArea: {
     margin: 16,

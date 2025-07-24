@@ -10,7 +10,7 @@ type Props = {
 export default function ActionButton({ icon, onPress, size}: Props) {
   return (
 	<TouchableOpacity onPress={onPress}>
-	  <AntDesign name={icon} size={size ? size : 35} color="white" />
+	  <AntDesign name={icon} size={size ? size : 34} color="white" />
 	</TouchableOpacity>
   );
 }

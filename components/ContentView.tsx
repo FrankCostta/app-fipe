@@ -1,6 +1,8 @@
 
+import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ActionButton from "./ActionButton";
+import WebModal from "./WebModal";
 
 type Props = {
 	data: any;
@@ -8,6 +10,14 @@ type Props = {
 }
 
 export default function ContentView({ data, enabled }: Props) {
+	const [modalVisible, setModalVisible] = useState(false);
+	const [url, setUrl] = useState("");
+
+	const setQuery = () => {
+		let query = `${data.brand} ${data.model} ${data.modelYear}`.replaceAll(" ", "+");
+		setUrl(`https://duckduckgo.com/?q=${query}&ia=images&iax=images`);
+		setModalVisible(true);
+	};
   
   if (!enabled) {
 	return (
@@ -25,10 +35,20 @@ export default function ContentView({ data, enabled }: Props) {
 		</View>
 
 		<View style={styles.optionsBar}>
-			<ActionButton icon="picture" onPress={()=> alert("Indisponível")}/>
-			<ActionButton icon="exclamationcircleo" onPress={()=> alert("Indisponível")} size={60} />
+			<ActionButton 
+				icon="search1" 
+				onPress={()=> setQuery()}
+			/>
+			<ActionButton icon="infocirlceo" onPress={()=> alert("Indisponível")} size={60} />
 			<ActionButton icon="github" onPress={()=> alert("Indisponível")}/>
 		</View>
+
+		<WebModal 
+			 url={url}
+			 visible={modalVisible}
+			onClose={() => setModalVisible(false)} 
+		/>
+
 	</View>
   );
 }
@@ -48,14 +68,15 @@ const styles = StyleSheet.create({
 	height: "70%",
 	justifyContent: "center",
 	alignItems: "center",
-	backgroundColor: "#a4a0ee",
-	marginVertical: 16,
-	borderRadius: 25,
+	borderWidth: 8,
+	borderColor: "#0f092d",
+	marginVertical: 10,
+	borderRadius: 20,
   },
   price: {
-	fontSize: 30,
-	fontWeight: "bold",
-	color: "#0f092d",
+	fontSize: 34,
+	fontWeight: 900,
+	color: "#0fad0a",
   },
   optionsBar: {
 	height: "30%",
@@ -63,6 +84,6 @@ const styles = StyleSheet.create({
 	justifyContent: "space-evenly",
 	alignItems: "center",
 	backgroundColor: "#160e3b",
-	borderRadius: 30,
+	borderRadius: 20,
   },
 });

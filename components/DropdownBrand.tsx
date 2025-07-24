@@ -13,6 +13,7 @@ type Props = {
 
 export default function DropdownBrand({ label, options, enabled, onCodeSelect }: Props) {
 	const [visible, setVisible] = useState(false);
+	const [selectedLabel, setSelectedLabel] = useState("");
 
 	if (!enabled) {
 		return (
@@ -26,7 +27,7 @@ export default function DropdownBrand({ label, options, enabled, onCodeSelect }:
 				style={styles.container}
 				onPress={() => {setVisible(true)}}
 			>
-				<Text style={styles.label}>{label}</Text>
+				<Text style={styles.label}>{selectedLabel ? selectedLabel : label}</Text>
 			</TouchableOpacity>
 
 			<ModalDropdown
@@ -40,8 +41,10 @@ export default function DropdownBrand({ label, options, enabled, onCodeSelect }:
 					renderItem={({item}) => (
 						<SelectBrand 
 							label={item.name} 
+							code={item.code}
 							onSelect={() => {
 								setVisible(false);
+								setSelectedLabel(item.name);
 								onCodeSelect && onCodeSelect(item.code);
 							}}
 						/>

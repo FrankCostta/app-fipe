@@ -14,7 +14,6 @@ export default function ModalDropdown({title, isVisible, onClose, children}: Pro
 			visible={isVisible}
 			transparent={true}
 			onRequestClose={onClose}
-			animationType="fade"
 		>
 			<View style={styles.container}>
 				<View style={styles.content}>

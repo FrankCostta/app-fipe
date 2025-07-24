@@ -15,7 +15,7 @@ type Props = {
 export default function SelectItem({label, onSelect}: Props) {
 	return (
 		<TouchableOpacity style={styles.container} onPress={onSelect}>
-			<Text style={styles.label}>{label}</Text>
+			<Text style={styles.label}>{label !== "32000" ? label : "Zero KM"}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		fontSize: 14,
-		fontWeight: "bold",
-		color: "#867a7a"
+		color: "#6e6666"
 	}
 });

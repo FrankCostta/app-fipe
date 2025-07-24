@@ -48,7 +48,8 @@ export default function CategoryRadioButton({
       <View style={selected ? [styles.circle, {borderColor: "#0F092D"}]  : styles.circle}>
         <Image 
           source={selected ? iconPath[icon][1] : iconPath[icon][0]}
-          style={styles.imgIcon} />
+          style={styles.imgIcon}
+        />
       </View>
       <Text style={selected ? [styles.label, {color: "#0F092D"}] : styles.label}>{label}</Text>
   </TouchableOpacity>
