@@ -27,18 +27,20 @@ const styles = StyleSheet.create({
 	container: {
 		height: 80,
 		flexDirection: "row",
-		padding: 16,
+		padding: 10,
 		borderBottomColor: "#c8c8ce",
 		borderBottomWidth: 1,
 		alignItems: "center"
 	},
 	icon: {
+		resizeMode: "center",
 		width: 50,
 		height: 50,
 		marginHorizontal: 20
 	},
 	label: {
-		fontSize: 20,
-		color: "#6d6969"
+		fontSize: 18,
+		color: "#726a6a",
+		marginLeft: 12,
 	}
 });

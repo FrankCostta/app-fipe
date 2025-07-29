@@ -83,7 +83,7 @@ export default function Index() {
   }
   
   return (
-    <View style={{ backgroundColor: "#ffffff",}}>
+    <View style={styles.container}>
       <Header /> {/* Logo fixada ao topo do app */}
 
       {/* Botões de categoria dos veículos */}
@@ -140,6 +140,10 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+  },
   categoryBar: {
     flexDirection: "row",
     justifyContent: "space-around",
