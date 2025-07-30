@@ -118,7 +118,7 @@ export default function Index() {
           label="Selecione um modelo"
           onCodeSelect={(code) => loadYears(code)}
         />
-		
+		 
 		{/* Dropdown de seleção do ano do veiculo */}
         <Dropdown
           options={years}
