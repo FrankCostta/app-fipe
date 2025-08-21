@@ -1,5 +1,5 @@
 
-import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, TouchableHighlight } from "react-native";
 import imageUri from "../services/image-uri";
 
 
@@ -8,17 +8,17 @@ type Props = {
 	label: string;
 	onSelect: () => void;
 	code: number;
-}
+} 
 
 export default function SelectBrand({label, code, onSelect}: Props) {
 	return (
-		<TouchableOpacity style={styles.container} onPress={onSelect}>
+		<TouchableHighlight style={styles.container} onPress={onSelect}>
 			<Image
 				style={styles.icon}
-				source={imageUri[code] || require("@/assets/images/ui/question.png")}
+				source={ imageUri[code] || require("@/assets/images/ui/question.png")}
 			/>
 			<Text style={styles.label}>{label}</Text>
-		</TouchableOpacity>
+		</TouchableHighlight>
 	);
 }
 

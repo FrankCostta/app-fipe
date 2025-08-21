@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import api from "@/services/api";
@@ -28,6 +28,19 @@ export default function Index() {
   const [models, setModels] = useState([]);
   const [years, setYears] = useState([]);
   const [info, setInfo] = useState([]);
+
+  useEffect(() => {
+    setBrands([]);
+    setModels([]);
+    setYears([]);
+    setInfo([]);
+    setSelectedBrand("");
+    setSelectedModel("");
+    setEnableDropdownBrand(false);
+    setEnableDropdownModel(false);
+    setEnableDropdownYear(false);
+    setEnableContentView(false);
+}, [selectedCategory]);
 
   // Seleciona uma categoria de veículo
   // habilitando o dropdown de marcas
@@ -106,7 +119,10 @@ export default function Index() {
           options={brands}
           enabled={enableDropdownBrand}
           label="Selecione uma marca"
-          onCodeSelect={(code) => loadModels(code)}
+          onCodeSelect={(code) => {
+            setSelectedBrand(code); // Atualiza o estado
+            loadModels(code)
+          }}
         />
 
         <Text style={styles.separator}>|||</Text>
@@ -116,7 +132,10 @@ export default function Index() {
           options={models}
           enabled={enableDropdownModel}
           label="Selecione um modelo"
-          onCodeSelect={(code) => loadYears(code)}
+          onCodeSelect={(code) => {
+            setSelectedModel(code); // Atualiza o estado
+            loadYears(code);
+          }}
         />
 		 
 		{/* Dropdown de seleção do ano do veiculo */}
