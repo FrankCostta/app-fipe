@@ -116,7 +116,7 @@ export default function Index() {
 		
 		{/* Dropown de seleção da marca do veiculo */}
         <DropdownBrand
-          options={brands}
+          data={brands}
           enabled={enableDropdownBrand}
           label="Selecione uma marca"
           onCodeSelect={(code) => {
@@ -129,7 +129,7 @@ export default function Index() {
 		
 		{/* Dropdown de seleção do modelo do veiculo */}
         <Dropdown
-          options={models}
+          data={models}
           enabled={enableDropdownModel}
           label="Selecione um modelo"
           onCodeSelect={(code) => {
@@ -140,7 +140,7 @@ export default function Index() {
 		 
 		{/* Dropdown de seleção do ano do veiculo */}
         <Dropdown
-          options={years}
+          data={years}
           enabled={enableDropdownYear}
           label="Selecione o ano do veículo"
           onCodeSelect={(code) => loadInfo(code)}
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     margin: 16,
   },
   separator: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#0f092d",
     textAlign: "center",

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ActionButton from "./ActionButton";
+import ModalDescriptions from "./ModalDescriptions";
 import WebModal from "./WebModal";
 
 type Props = {
@@ -10,13 +11,14 @@ type Props = {
 }
 
 export default function ContentView({ data, enabled }: Props) {
-	const [modalVisible, setModalVisible] = useState(false);
+	const [modalWebVisible, setModalWebVisible] = useState(false);
+	const [modalDescVisible, setModalDescVisible] = useState(false);
 	const [url, setUrl] = useState("");
 
 	const setQuery = () => {
 		let query = `${data.brand} ${data.model} ${data.modelYear}`.replaceAll(" ", "+");
 		setUrl(`https://duckduckgo.com/?q=${query}&ia=images&iax=images`);
-		setModalVisible(true);
+		setModalWebVisible(true);
 	};
   
   if (!enabled) {
@@ -39,14 +41,20 @@ export default function ContentView({ data, enabled }: Props) {
 				icon="search1" 
 				onPress={()=> setQuery()}
 			/>
-			<ActionButton icon="infocirlceo" onPress={()=> alert("Indisponível")} size={60} />
+			<ActionButton icon="infocirlceo" onPress={()=> setModalDescVisible(true)} size={60} />
 			<ActionButton icon="github" onPress={()=> alert("Indisponível")}/>
 		</View>
 
+		<ModalDescriptions 
+			isVisible={modalDescVisible} 
+			onClose={() => setModalDescVisible(false)}
+		/>
+
+		{/* Visualizador de pagina web para imagens do veículo selecionado */}
 		<WebModal 
 			 url={url}
-			 visible={modalVisible}
-			onClose={() => setModalVisible(false)} 
+			 visible={modalWebVisible}
+			onClose={() => setModalWebVisible(false)} 
 		/>
 
 	</View>

@@ -15,7 +15,7 @@ type Props = {
 export default function SelectItem({label, onSelect}: Props) {
 	return (
 		<TouchableOpacity style={styles.container} onPress={onSelect}>
-			<Text style={styles.label}>{label !== "32000" ? label : "Zero KM"}</Text>
+			<Text style={styles.label}>{label.includes("32000") ? "Zero Km" : label}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -23,16 +23,17 @@ export default function SelectItem({label, onSelect}: Props) {
 
 const styles = StyleSheet.create({
 	container: {
+		marginHorizontal: 8,
 		height: 70,
 		flexDirection: "row",
 		padding: 16,
-		borderBottomColor: "#c8c8ce",
+		borderBottomColor: "#e7e7ee",
 		borderBottomWidth: 1,
 		alignItems: "center",
 		justifyContent: "flex-start",
 	},
 	label: {
 		fontSize: 14,
-		color: "#6e6666"
+		color: "#545457"
 	}
 });

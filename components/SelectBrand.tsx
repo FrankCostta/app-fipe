@@ -1,5 +1,5 @@
 
-import { Image, StyleSheet, Text, TouchableHighlight } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import imageUri from "../services/image-uri";
 
 
@@ -12,35 +12,37 @@ type Props = {
 
 export default function SelectBrand({label, code, onSelect}: Props) {
 	return (
-		<TouchableHighlight style={styles.container} onPress={onSelect}>
+		<TouchableOpacity style={styles.container} onPress={onSelect}>
 			<Image
 				style={styles.icon}
 				source={ imageUri[code] || require("@/assets/images/ui/question.png")}
 			/>
 			<Text style={styles.label}>{label}</Text>
-		</TouchableHighlight>
+		</TouchableOpacity>
 	);
 }
 
 
 const styles = StyleSheet.create({
 	container: {
+		marginHorizontal: 10,
 		height: 80,
 		flexDirection: "row",
 		padding: 10,
 		borderBottomColor: "#c8c8ce",
 		borderBottomWidth: 1,
-		alignItems: "center"
+		alignItems: "center",
 	},
 	icon: {
 		resizeMode: "center",
-		width: 50,
-		height: 50,
-		marginHorizontal: 20
+		width: 40,
+		height: 40,
+		marginHorizontal: 25
 	},
 	label: {
-		fontSize: 18,
-		color: "#726a6a",
+		fontSize: 14,
+		fontWeight: 500,
+		color: "#545457",
 		marginLeft: 12,
 	}
 });
